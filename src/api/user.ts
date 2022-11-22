@@ -4,7 +4,7 @@ import { User } from '../lib/types';
 
 export const getUser = (token: string) => {
   return axios.get<User>(
-    `http://localhost:8080/user/get/bysession?sessionToken=${token}`,
+    `http://localhost:8080/user/bysession?sessionToken=${token}`,
   );
 };
 

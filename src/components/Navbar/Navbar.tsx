@@ -1,7 +1,8 @@
 import './Navbar.less';
 
-import { ConsoleSqlOutlined, SmileOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import {
+  Avatar,
   Button,
   Dropdown,
   Layout,
@@ -15,6 +16,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import { logout } from '../../api/user';
 import Day from '../../assets/images/day.png';
+import Logo from '../../assets/images/logo.png';
 import Night from '../../assets/images/night.png';
 import { Paths } from '../../lib/enums';
 import { openNotification } from '../../lib/notifications';
@@ -35,7 +37,7 @@ const Navbar = () => {
       const navbarColors = {
         [Paths.Map]: 'rgba(138, 138, 138, 0.5)',
         [Paths.Profile]: theme === 'light' ? '#1DA57A' : '#2e1b40',
-        '/capital': theme === 'light' ? '#85d4bb' : '#ddd',
+        '/capital': theme === 'light' ? '#1DA57A' : '#2e1b40',
       } as { [k: string]: string };
 
       for (const key of Object.keys(navbarColors)) {
@@ -93,10 +95,7 @@ const Navbar = () => {
         }}
       >
         <NavLink to={Paths.Home} end className="nav-link">
-          <ConsoleSqlOutlined
-            data-theme={theme}
-            style={{ fontSize: '50px', color: '#fff', marginTop: '15px' }}
-          />
+          <img src={Logo} alt="capitals" height={40} />
         </NavLink>
         <Space>
           <NavLink
@@ -139,7 +138,7 @@ const Navbar = () => {
           </NavLink>
           {token ? (
             <Dropdown menu={{ items }} trigger={['click']}>
-              <SmileOutlined style={{ fontSize: '30px' }} />
+              <Avatar size={40} icon={<UserOutlined />} />
             </Dropdown>
           ) : (
             <Typography.Text

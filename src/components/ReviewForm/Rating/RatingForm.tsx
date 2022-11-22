@@ -7,12 +7,12 @@ import { useThemeStore } from '../../../store/themeStore';
 import './RatingForm.less';
 const fields = [
   { label: 'Food', name: 'food' },
-  { label: 'Places', name: 'places' },
+  { label: 'Attractions', name: 'attractions' },
   { label: 'Transport', name: 'transport' },
-  { label: 'Zabytki', name: 'zabytki' },
+  { label: 'General impression', name: 'general' },
 ];
 
-type FieldNames = 'food' | 'places' | 'zabytki' | 'transport';
+type FieldNames = 'food' | 'attractions' | 'general' | 'transport';
 
 const RatingForm = () => {
   const { review, setRating } = useReviewStore();

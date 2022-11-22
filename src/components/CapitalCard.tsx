@@ -1,19 +1,20 @@
 import { Space, Typography } from 'antd';
 import React from 'react';
 
-import Australia from '../assets/images/Flag_of_Australia.svg';
 type Props = {
   name: string;
   country: string;
+  image: string;
 };
-const CapitalCard = ({ name, country }: Props) => {
+const CapitalCard = ({ name, country, image }: Props) => {
   return (
     <Space
       style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#fff',
         padding: '15px',
+        backgroundColor: 'rgba(29, 165, 122, 0.5)',
+        borderBottomRightRadius: '30px',
       }}
     >
       <Space.Compact
@@ -24,7 +25,7 @@ const CapitalCard = ({ name, country }: Props) => {
           {name}
         </Typography.Text>
         <img
-          src={Australia}
+          src={`data:image/svg+xml;base64,${image}`}
           alt="australia"
           height={50}
           style={{ marginLeft: '20px' }}

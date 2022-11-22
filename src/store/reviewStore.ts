@@ -1,11 +1,11 @@
 import create from 'zustand';
 export type Ratings = {
   food: number;
-  places: number;
+  attractions: number;
   transport: number;
-  zabytki: number;
+  general: number;
 };
-type Review = {
+export type Review = {
   ratings: Ratings;
   text: string;
 };
@@ -19,7 +19,7 @@ interface ReviewState {
 
 export const useReviewStore = create<ReviewState>()(set => ({
   review: {
-    ratings: { food: 0, places: 0, transport: 0, zabytki: 0 },
+    ratings: { food: 0, attractions: 0, transport: 0, general: 0 },
     text: '',
   },
   setRating: (marks: Ratings) =>
@@ -27,9 +27,9 @@ export const useReviewStore = create<ReviewState>()(set => ({
   setText: (text: string) =>
     set(state => ({ review: { ...state.review, text } })),
   setReview: () =>
-    set(state => ({
+    set(() => ({
       review: {
-        ratings: { food: 0, places: 0, transport: 0, zabytki: 0 },
+        ratings: { food: 0, attractions: 0, transport: 0, general: 0 },
         text: '',
       },
     })),

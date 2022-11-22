@@ -5,8 +5,8 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 
 import { getCapitalInfo } from '../../api/capital';
-import Flag from '../../assets/images/Flag_of_Australia.svg';
-
+import { useThemeStore } from '../../store/themeStore';
+import './CapitalMarker.less';
 type Props = {
   name: string;
   lat: number;
@@ -14,24 +14,53 @@ type Props = {
 };
 
 const CapitalMarker = ({ name, lat, lon }: Props) => {
+  const { theme } = useThemeStore();
   const query = useQuery({
     queryKey: ['capital', name],
     queryFn: () => getCapitalInfo(name || ''),
     enabled: !!name,
   });
-  if (!query.data) {
-    // eslint-disable-next-line no-console
-    console.log(name);
+  if (!query.data || !query.data.flaglocation) {
+    return (
+      <Link to={`/capital/${name}`}>
+        <Marker position={[lat, lon]} opacity={0}>
+          <Tooltip
+            data-theme={theme}
+            opacity={1}
+            interactive
+            permanent
+            direction="top"
+            className="tooltip"
+          >
+            <Space>
+              <Typography.Title level={4}>{name}</Typography.Title>
+            </Space>
+          </Tooltip>
+        </Marker>
+      </Link>
+    );
   }
   return (
     <>
       {query.data && (
         <Link to={`/capital/${name}`}>
           <Marker position={[lat, lon]} opacity={0}>
-            <Tooltip opacity={1} interactive permanent direction="top">
+            <Tooltip
+              data-theme={theme}
+              opacity={1}
+              interactive
+              permanent
+              direction="top"
+              className="tooltip"
+            >
               <Space>
                 <Typography.Title level={4}>{name}</Typography.Title>
-                <Image src={Flag} alt="flag" width={50} height={30} />
+                <Image
+                  src={`data:image/svg+xml;base64,${query.data.flaglocation.value}`}
+                  alt="flag"
+                  width={50}
+                  height={30}
+                />
               </Space>
             </Tooltip>
           </Marker>

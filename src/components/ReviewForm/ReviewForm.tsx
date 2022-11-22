@@ -105,7 +105,7 @@ const ReviewForm = ({
                 token &&
                   postReview({
                     token,
-                    text: review.text,
+                    review,
                     capital: capitalName,
                   });
                 setReview();
